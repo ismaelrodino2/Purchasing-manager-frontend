@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Context,
-  ProductsContext,
-  StoreContext,
-  UsersContext,
-} from "./Context";
+import { Context, StoreContext, UsersContext } from "./Context";
 import useStorage from "utils/useStorage";
 import { useState } from "react";
 
@@ -14,28 +9,21 @@ const StoreProvider = ({ children }) => {
   const [allProducts, setAllProducts] = useStorage("allProducts");
 
   return (
-    <ProductsContext.Provider
+    <UsersContext.Provider
       value={{
-        allProducts,
-        setAllProducts,
+        allUsers,
+        setAllusers,
       }}
     >
-      <UsersContext.Provider
+      <StoreContext.Provider
         value={{
-          allUsers,
-          setAllusers,
+          token,
+          setToken,
         }}
       >
-        <StoreContext.Provider
-          value={{
-            token,
-            setToken,
-          }}
-        >
-          {children}
-        </StoreContext.Provider>
-      </UsersContext.Provider>
-    </ProductsContext.Provider>
+        {children}
+      </StoreContext.Provider>
+    </UsersContext.Provider>
   );
 };
 

@@ -10,7 +10,4 @@ export const UsersContext = createContext({
   setAllusers: () => {},
 });
 
-export const ProductsContext = createContext({
-  allProducts: [],
-  setAllProducts: () => {},
-});
+

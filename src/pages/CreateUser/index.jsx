@@ -1,10 +1,11 @@
 import React, { useCallback, useContext, useEffect } from "react";
-import {StoreContext} from "components/Store/Context";
+import { StoreContext, UsersContext } from "components/Store/Context";
 import * as Styled from "./styles";
 import axios from "axios";
 import { useState } from "react";
 import useStorage from "utils/useStorage";
 import { ModalLoading } from "components/ModalLoading";
+import syncUsers from "components/Store/syncUsers";
 
 const CreateUser = () => {
   const { token } = useContext(StoreContext);
@@ -13,6 +14,7 @@ const CreateUser = () => {
 
   const [users, setUsers] = useState();
   const [loading, setLoading] = useState(false);
+  const { setAllusers } = useContext(UsersContext);
 
   const onSubmit = useCallback(
     (e) => {
@@ -35,6 +37,7 @@ const CreateUser = () => {
           setUsers(response);
           window.alert("usuário criado com sucesso");
           document.getElementById("form").reset();
+          syncUsers(userToken, setAllusers);
         } catch (error) {
           console.error(error.message);
         }
@@ -43,7 +46,7 @@ const CreateUser = () => {
 
       fetchData();
     },
-    [userToken]
+    [userToken, setAllusers]
   );
 
   return (

@@ -2,12 +2,12 @@ import React, { useContext, useEffect } from "react";
 import {
   UsersContext,
   StoreContext,
-  ProductsContext,
 } from "components/Store/Context";
 import * as Styled from "./styles";
 import axios from "axios";
 import { useState } from "react";
 import { LoadingDots } from "components/Loading";
+import { ProductsContext } from "context/ProductsContext";
 
 const Users = () => {
   const { token } = useContext(StoreContext);

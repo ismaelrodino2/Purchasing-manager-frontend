@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import {
-  ProductsContext,
   StoreContext,
   UsersContext,
 } from "components/Store/Context";
@@ -9,6 +8,7 @@ import axios from "axios";
 import { useState } from "react";
 import { LoadingDots } from "components/Loading";
 import { ModalLoading } from "components/ModalLoading";
+import { ProductsContext } from "context/ProductsContext";
 
 const Products = () => {
   const { token } = useContext(StoreContext);
