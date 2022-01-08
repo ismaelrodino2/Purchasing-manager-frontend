@@ -1,20 +1,16 @@
-import React, { useCallback, useContext, useEffect } from "react";
-import { StoreContext } from "components/Store/Context";
+import React, { useCallback, useContext } from "react";
 import * as Styled from "./styles";
 import axios from "axios";
 import { useState } from "react";
-import useStorage from "utils/useStorage";
 import { ModalLoading } from "components/ModalLoading";
 import { ProductsContext } from "context/ProductsContext";
+import { TokenContext } from "context/TokenContext";
 
 const CreateProduct = () => {
-  const { token } = useContext(StoreContext);
-  const userToken = token.replace(/['"]+/g, "");
+  const { token } = useContext(TokenContext);
 
-  const [users, setUsers] = useState();
   const [loading, setLoading] = useState(false);
-  const { allProducts, syncProducts } = useContext(ProductsContext);
-
+  const { syncProducts } = useContext(ProductsContext);
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
@@ -27,26 +23,21 @@ const CreateProduct = () => {
       const fetchData = async () => {
         setLoading(true);
         try {
-          const { data: response } = await axios.post(
-            "http://localhost:3333/products",
-            article,
-            {
-              headers: { Authorization: `Bearer ${userToken}` },
-            }
-          );
-          setUsers(response);
-          window.alert("produto criado com sucesso");
+          await axios.post("http://localhost:3333/products", article, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          window.alert("Produto criado com sucesso");
           document.getElementById("form").reset();
-          syncProducts(userToken);
+          syncProducts();
         } catch (error) {
           console.error(error.message);
         }
-        setLoading(false);
       };
 
       fetchData();
+      setLoading(false);
     },
-    [userToken]
+    [token, syncProducts]
   );
 
   return (

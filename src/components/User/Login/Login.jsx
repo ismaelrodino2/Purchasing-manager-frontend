@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import {StoreContext} from "components/Store/Context";
 import UIButton from "components/UI/Button/Button";
 
 import "./Login.css";
 import axios from "axios";
 import { ModalLoading } from "components/ModalLoading";
+import { TokenContext } from "context/TokenContext";
 
 function initialState() {
   return { userName: "", password: "" };
@@ -15,7 +15,7 @@ const UserLogin = () => {
   const [loading, setLoading] = useState();
   const [values, setValues] = useState(initialState);
   const [error, setError] = useState(null);
-  const { setToken } = useContext(StoreContext);
+  const { setToken } = useContext(TokenContext);
   const history = useHistory();
 
   function onChange(event) {

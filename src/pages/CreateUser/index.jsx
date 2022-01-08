@@ -1,20 +1,17 @@
-import React, { useCallback, useContext, useEffect } from "react";
-import { StoreContext, UsersContext } from "components/Store/Context";
+import React, { useCallback, useContext } from "react";
+import { TokenContext } from "context/TokenContext";
+import { UsersContext } from "context/UsersContext";
+
 import * as Styled from "./styles";
 import axios from "axios";
 import { useState } from "react";
-import useStorage from "utils/useStorage";
 import { ModalLoading } from "components/ModalLoading";
-import syncUsers from "components/Store/syncUsers";
 
 const CreateUser = () => {
-  const { token } = useContext(StoreContext);
-  const userToken = token.replace(/['"]+/g, "");
-  console.log(token);
+  const { token } = useContext(TokenContext);
 
-  const [users, setUsers] = useState();
   const [loading, setLoading] = useState(false);
-  const { setAllusers } = useContext(UsersContext);
+  const { syncUsers } = useContext(UsersContext);
 
   const onSubmit = useCallback(
     (e) => {
@@ -27,26 +24,21 @@ const CreateUser = () => {
       const fetchData = async () => {
         setLoading(true);
         try {
-          const { data: response } = await axios.post(
-            "http://localhost:3333/users",
-            article,
-            {
-              headers: { Authorization: `Bearer ${userToken}` },
-            }
-          );
-          setUsers(response);
-          window.alert("usuário criado com sucesso");
+          await axios.post("http://localhost:3333/users", article, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          window.alert("Usuário criado com sucesso");
           document.getElementById("form").reset();
-          syncUsers(userToken, setAllusers);
+          syncUsers();
         } catch (error) {
           console.error(error.message);
         }
-        setLoading(false);
       };
 
       fetchData();
+      setLoading(false);
     },
-    [userToken, setAllusers]
+    [token, syncUsers]
   );
 
   return (

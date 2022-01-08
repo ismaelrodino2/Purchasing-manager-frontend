@@ -11,6 +11,8 @@ export const HomeBar = () => {
             <li><Link to="/products">Produtos</Link></li>
             <li><Link to="/create-product">Criar produto</Link></li>
             <li><Link to="/manager">Gerenciador</Link></li>
+            <li><Link to="/relations">Relações</Link></li>
+
         </ul>
 
     </Styled.ToolBarWrapper>

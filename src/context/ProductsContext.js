@@ -1,6 +1,12 @@
 import axios from "axios";
-import { StoreContext } from "components/Store/Context";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { TokenContext } from "context/TokenContext";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 export const ProductsContext = createContext({
   allProducts: [],
@@ -11,9 +17,9 @@ export const ProductsContext = createContext({
 export const ProductsContextProvider = ({ children }) => {
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoading] = useState();
-  const { token } = useContext(StoreContext);
+  const { token } = useContext(TokenContext);
 
-  const syncProducts = async () => {
+  const syncProducts = useCallback(async () => {
     setLoading(true);
     try {
       const { data: response } = await axios.get(
@@ -27,7 +33,7 @@ export const ProductsContextProvider = ({ children }) => {
       console.error(error.message);
     }
     setLoading(false);
-  };
+  }, [token]);
 
   useEffect(() => {
     syncProducts();
