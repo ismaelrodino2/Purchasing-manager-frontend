@@ -22,7 +22,7 @@ export const theme = {
     },
   },
   media: {
-    lteMedium: "(max-width: 768px)",
+    lteMedium: "(min-width: 768px)",
   },
   spacings: {
     xsmall: "8rem",
