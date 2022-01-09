@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
-import * as Styled from "./styles";
-import { UsersContext } from "context/UsersContext";
+import React, { useContext } from 'react';
+import * as Styled from './styles';
+import { UsersContext } from 'context/UsersContext';
+import { Heading } from '../../components/Heading';
+import Container from 'components/Container';
 
 const Users = () => {
   const { allUsers } = useContext(UsersContext);
 
   return (
-    <Styled.Container>
-      <h1>Lista de usuários</h1>
+    <Container>
+      <Heading>Usuários</Heading>
       <Styled.Grid>
         {allUsers.map((el) => {
           return (
@@ -18,7 +20,7 @@ const Users = () => {
           );
         })}
       </Styled.Grid>
-    </Styled.Container>
+    </Container>
   );
 };
 

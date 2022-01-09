@@ -6,6 +6,7 @@ import * as Styled from "./styles";
 import axios from "axios";
 import { useState } from "react";
 import { ModalLoading } from "components/ModalLoading";
+import { Container } from "components/Container/styles";
 
 const CreateUser = () => {
   const { token } = useContext(TokenContext);
@@ -42,7 +43,7 @@ const CreateUser = () => {
   );
 
   return (
-    <Styled.Container>
+    <Container>
       {loading && <ModalLoading />}
       <h1>Criar usuário</h1>
       <form onSubmit={onSubmit} id="form">
@@ -58,7 +59,7 @@ const CreateUser = () => {
           <Styled.Button type="submit">Criar</Styled.Button>
         </Styled.Wrapper>
       </form>
-    </Styled.Container>
+    </Container>
   );
 };
 

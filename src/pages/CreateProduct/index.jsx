@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ModalLoading } from "components/ModalLoading";
 import { ProductsContext } from "context/ProductsContext";
 import { TokenContext } from "context/TokenContext";
+import { Container } from "components/Container/styles";
 
 const CreateProduct = () => {
   const { token } = useContext(TokenContext);
@@ -41,7 +42,7 @@ const CreateProduct = () => {
   );
 
   return (
-    <Styled.Container>
+    <Container>
       {loading && <ModalLoading />}
       <h1>Criar Produto</h1>
       <form onSubmit={onSubmit} id="form">
@@ -61,7 +62,7 @@ const CreateProduct = () => {
           <Styled.Button type="submit">Criar</Styled.Button>
         </Styled.Wrapper>
       </form>
-    </Styled.Container>
+    </Container>
   );
 };
 

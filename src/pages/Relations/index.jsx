@@ -3,6 +3,7 @@ import { TokenContext } from "context/TokenContext";
 import * as Styled from "./styles";
 import axios from "axios";
 import { ModalLoading } from "components/ModalLoading";
+import { Container } from "components/Container/styles";
 
 const Relations = () => {
   const [loading, setLoading] = useState();
@@ -30,7 +31,7 @@ const Relations = () => {
   }, [token]);
 
   return (
-    <Styled.Container>
+    <Container>
       {loading && <ModalLoading />}
       <h1>Lista de relações</h1>
       <Styled.Grid>
@@ -56,7 +57,7 @@ const Relations = () => {
             );
           })}
       </Styled.Grid>
-    </Styled.Container>
+    </Container>
   );
 };
 

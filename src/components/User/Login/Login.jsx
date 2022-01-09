@@ -6,6 +6,7 @@ import "./Login.css";
 import axios from "axios";
 import { ModalLoading } from "components/ModalLoading";
 import { TokenContext } from "context/TokenContext";
+import { Button } from "components/Button";
 
 function initialState() {
   return { userName: "", password: "" };
@@ -73,14 +74,14 @@ const UserLogin = () => {
           />
         </div>
         {error && <div className="user-login__error">{error}</div>}
-        <UIButton
+        <Button
           type="submit"
           theme="contained-green"
           className="user-login__submit-button"
           rounded
         >
           Entrar
-        </UIButton>
+        </Button>
       </form>
     </div>
   );

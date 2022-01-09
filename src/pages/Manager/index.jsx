@@ -5,6 +5,7 @@ import { TokenContext } from "context/TokenContext";
 import { UsersContext } from "context/UsersContext";
 import React, { useContext, useState } from "react";
 import * as Styled from "./styles";
+import { Container } from "components/Container/styles";
 
 const Manager = () => {
   const { allProducts } = useContext(ProductsContext);
@@ -44,7 +45,7 @@ const Manager = () => {
   const [selectUser, setSelectUser] = useState();
 
   return (
-    <Styled.Container>
+    <Container>
       {loading && <ModalLoading />}
       <form onSubmit={onSubmit} id="form">
         <h1>escolha o produto</h1>
@@ -66,7 +67,7 @@ const Manager = () => {
         </select>
         <button>Atrelar ao Usuário</button>
       </form>
-    </Styled.Container>
+    </Container>
   );
 };
 

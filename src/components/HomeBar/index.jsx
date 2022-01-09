@@ -10,28 +10,19 @@ export const HomeBar = () => {
       <Styled.MenuIcon onClick={() => setActive(!active)}>
         <Menu size="48" />
       </Styled.MenuIcon>
-      <Styled.ToolBarWrapper active={active} onClick={() => setActive(!active)}>
-        <ul>
-          <li>
-            <Link to="/">Usuários</Link>
-          </li>
-          <li>
-            <Link to="/create-user">Criar usuário</Link>
-          </li>
-          <li>
-            <Link to="/products">Produtos</Link>
-          </li>
-          <li>
-            <Link to="/create-product">Criar produto</Link>
-          </li>
-          <li>
-            <Link to="/manager">Gerenciador</Link>
-          </li>
-          <li>
-            <Link to="/relations">Relações</Link>
-          </li>
-        </ul>
-      </Styled.ToolBarWrapper>
+      <Styled.Container visible={active} onClick={() => setActive(!active)}>
+        <Link to="/">Usuários</Link>
+
+        <Link to="/create-user">Criar usuário</Link>
+
+        <Link to="/products">Produtos</Link>
+
+        <Link to="/create-product">Criar produto</Link>
+
+        <Link to="/manager">Gerenciador</Link>
+
+        <Link to="/relations">Relações</Link>
+      </Styled.Container>
     </div>
   );
 };

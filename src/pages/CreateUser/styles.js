@@ -1,10 +1,4 @@
 import styled from "styled-components";
-export const Container = styled.div`
-  height: calc(100vh - 54px - 21px);
-  padding: 14px;
-  max-width: 1200px;
-  margin: 0 auto;
-`;
 
 export const Wrapper = styled.div`
 display: flex;
