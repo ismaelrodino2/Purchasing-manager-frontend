@@ -7,9 +7,6 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding: 0 1.4rem;
-  /* ${({ theme }) => css`
-    background-color: ${theme.colors.primaryColor};
-  `} */
 `;
 
 export const Center = styled.div`

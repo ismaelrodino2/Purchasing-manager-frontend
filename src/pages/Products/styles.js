@@ -14,4 +14,5 @@ export const Grid = styled.div`
   grid-template-columns: repeat(auto-fit, 200px);
   gap: 10px;
   justify-content: center;
+  padding: 10px;
 `;

@@ -4,12 +4,13 @@ export const Container = styled.div`
   ${({ theme }) => css`
     display: flex;
     justify-content: center;
+    background-color: ${theme.colors.primaryColor};
     & a {
       display: block;
       text-decoration: none;
       font-size: ${theme.fonts.sizes.small};
       padding: ${theme.spacings.small};
-      color: ${theme.colors.primaryColor};
+      color: ${theme.colors.white};
       position: relative;
     }
     & a::after {

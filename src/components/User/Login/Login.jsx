@@ -1,15 +1,15 @@
-import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import UIButton from "components/UI/Button/Button";
-
-import "./Login.css";
-import axios from "axios";
-import { ModalLoading } from "components/ModalLoading";
-import { TokenContext } from "context/TokenContext";
-import { Button } from "components/Button";
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import * as Styled from './styles';
+import { Heading } from 'components/Heading';
+import axios from 'axios';
+import { ModalLoading } from 'components/ModalLoading';
+import { TokenContext } from 'context/TokenContext';
+import { Button } from 'components/Button';
+import { FormControl } from 'components/FormControl';
 
 function initialState() {
-  return { userName: "", password: "" };
+  return { userName: '', password: '' };
 }
 
 const UserLogin = () => {
@@ -30,14 +30,13 @@ const UserLogin = () => {
 
   function onSubmit(event) {
     setLoading(true);
-    axios.post("http://localhost:3333/login", values).then((resp) => {
+    axios.post('http://localhost:3333/login', values).then((resp) => {
       const { data } = resp;
-      console.log(data);
       const { token } = data;
       if (token) {
-        localStorage.setItem("token", token);
+        localStorage.setItem('token', token);
         setToken(token);
-        return history.push("/");
+        return history.push('/');
       }
       setLoading(false);
     });
@@ -49,41 +48,38 @@ const UserLogin = () => {
   }
 
   return (
-    <div className="user-login">
+    <Styled.Container>
       {loading && <ModalLoading />}
-      <h1 className="user-login__title">Login</h1>
-      <form onSubmit={onSubmit}>
-        <div className="user-login__form-control">
-          <label htmlFor="user">Usuário</label>
-          <input
-            id="user"
-            type="text"
-            name="userName"
-            onChange={onChange}
-            value={values.userName}
-          />
-        </div>
-        <div className="user-login__form-control">
-          <label htmlFor="password">Senha</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            onChange={onChange}
-            value={values.password}
-          />
-        </div>
-        {error && <div className="user-login__error">{error}</div>}
-        <Button
-          type="submit"
-          theme="contained-green"
-          className="user-login__submit-button"
-          rounded
-        >
-          Entrar
-        </Button>
-      </form>
-    </div>
+      <Styled.Center>
+          <Heading>Login</Heading>
+          <form onSubmit={onSubmit}>
+            <FormControl>
+              <label htmlFor="user">Usuário</label>
+              <input
+                id="user"
+                type="text"
+                name="userName"
+                onChange={onChange}
+                value={values.userName}
+              />
+            </FormControl>
+            <FormControl>
+              <label htmlFor="password">Senha</label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                onChange={onChange}
+                value={values.password}
+              />
+            </FormControl>
+            {error && <Styled.Error>{error}</Styled.Error>}
+            <Button type="submit" theme="contained-green" rounded>
+              Entrar
+            </Button>
+          </form>
+      </Styled.Center>
+    </Styled.Container>
   );
 };
 

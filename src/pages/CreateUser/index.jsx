@@ -1,12 +1,14 @@
-import React, { useCallback, useContext } from "react";
-import { TokenContext } from "context/TokenContext";
-import { UsersContext } from "context/UsersContext";
+import React, { useCallback, useContext } from 'react';
+import { TokenContext } from 'context/TokenContext';
+import { UsersContext } from 'context/UsersContext';
 
-import * as Styled from "./styles";
-import axios from "axios";
-import { useState } from "react";
-import { ModalLoading } from "components/ModalLoading";
-import { Container } from "components/Container/styles";
+import * as Styled from './styles';
+import axios from 'axios';
+import { useState } from 'react';
+import { ModalLoading } from 'components/ModalLoading';
+import { Container } from 'components/Container/styles';
+import { Button } from 'components/Button';
+import { FormControl } from 'components/FormControl';
 
 const CreateUser = () => {
   const { token } = useContext(TokenContext);
@@ -25,11 +27,11 @@ const CreateUser = () => {
       const fetchData = async () => {
         setLoading(true);
         try {
-          await axios.post("http://localhost:3333/users", article, {
+          await axios.post('http://localhost:3333/users', article, {
             headers: { Authorization: `Bearer ${token}` },
           });
-          window.alert("Usuário criado com sucesso");
-          document.getElementById("form").reset();
+          window.alert('Usuário criado com sucesso');
+          document.getElementById('form').reset();
           syncUsers();
         } catch (error) {
           console.error(error.message);
@@ -39,24 +41,28 @@ const CreateUser = () => {
       fetchData();
       setLoading(false);
     },
-    [token, syncUsers]
+    [token, syncUsers],
   );
 
   return (
     <Container>
       {loading && <ModalLoading />}
       <h1>Criar usuário</h1>
-      <form onSubmit={onSubmit} id="form">
+      <form
+        onSubmit={onSubmit}
+        id="form"
+        style={{ display: 'flex', justifyContent: 'center' }}
+      >
         <Styled.Wrapper>
-          <Styled.InputWraper>
+          <FormControl>
             <label htmlFor="name">Nome:</label>
             <input id="name" type="name" name="name" />
-          </Styled.InputWraper>
-          <Styled.InputWraper>
+          </FormControl>
+          <FormControl>
             <label htmlFor="email">E-mail:</label>
             <input id="email" type="email" name="email" />
-          </Styled.InputWraper>
-          <Styled.Button type="submit">Criar</Styled.Button>
+          </FormControl>
+          <Button type="submit">Criar</Button>
         </Styled.Wrapper>
       </form>
     </Container>

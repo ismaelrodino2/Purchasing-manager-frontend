@@ -1,13 +1,21 @@
-import axios from "axios";
-import { LoginBar } from "components/LoginBar";
-import UIButton from "components/UI/Button/Button";
-import React, { useState } from "react";
+import axios from 'axios';
+import { Button } from 'components/Button';
+import { Heading } from 'components/Heading';
+import { FormControl } from 'components/FormControl';
+
+import { LoginBar } from 'components/LoginBar';
+import { ModalLoading } from 'components/ModalLoading';
+import UIButton from 'components/UI/Button/Button';
+import React, { useState } from 'react';
+import * as Styled from './styles';
 
 function initialState() {
-  return { userName: "", password: "" };
+  return { userName: '', password: '' };
 }
 
 export const Register = () => {
+  const [loading, setLoading] = useState(false);
+
   const [values, setValues] = useState(initialState);
   const [error, setError] = useState(null);
 
@@ -21,50 +29,52 @@ export const Register = () => {
   }
 
   function onSubmit(event) {
+    setLoading(true);
     event.preventDefault();
 
-    axios.post("http://localhost:3333/register", values).then((resp) => {});
+    axios.post('http://localhost:3333/register', values).then((resp) => {
+      window.alert('Success');
+    });
 
     setValues(initialState);
-    window.alert("Success");
+    setLoading(false);
   }
 
   return (
-    <div>
+    <>
       <LoginBar />
-      <div className="user-login">
-        <h1 className="user-login__title">Registrar</h1>
-        <form onSubmit={onSubmit}>
-          <div className="user-login__form-control">
-            <label htmlFor="user">Usuário</label>
-            <input
-              id="user"
-              type="text"
-              name="userName"
-              onChange={onChange}
-              value={values.userName}
-            />
-          </div>
-          <div className="user-login__form-control">
-            <label htmlFor="password">Senha</label>
-            <input
-              id="password"
-              type="password"
-              name="password"
-              onChange={onChange}
-              value={values.password}
-            />
-          </div>
-          <UIButton
-            type="submit"
-            theme="contained-green"
-            className="user-login__submit-button"
-            rounded
-          >
-            Registrar
-          </UIButton>
-        </form>
-      </div>
-    </div>
+      <Styled.Container>
+        {loading && <ModalLoading />}
+        <Styled.Center>
+          <Heading>Registrar-se</Heading>
+          <form onSubmit={onSubmit}>
+            <FormControl>
+              <label htmlFor="user">Usuário</label>
+              <input
+                id="user"
+                type="text"
+                name="userName"
+                onChange={onChange}
+                value={values.userName}
+              />
+            </FormControl>
+            <FormControl>
+              <label htmlFor="password">Senha</label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                onChange={onChange}
+                value={values.password}
+              />
+            </FormControl>
+            {error && <Styled.Error>{error}</Styled.Error>}
+            <Button type="submit" theme="contained-green" rounded>
+              Registrar
+            </Button>
+          </form>
+        </Styled.Center>
+      </Styled.Container>
+    </>
   );
 };

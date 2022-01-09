@@ -1,11 +1,14 @@
-import axios from "axios";
-import { ModalLoading } from "components/ModalLoading";
-import { ProductsContext } from "context/ProductsContext";
-import { TokenContext } from "context/TokenContext";
-import { UsersContext } from "context/UsersContext";
-import React, { useContext, useState } from "react";
-import * as Styled from "./styles";
-import { Container } from "components/Container/styles";
+import axios from 'axios';
+import { ModalLoading } from 'components/ModalLoading';
+import { ProductsContext } from 'context/ProductsContext';
+import { TokenContext } from 'context/TokenContext';
+import { UsersContext } from 'context/UsersContext';
+import React, { useContext, useState } from 'react';
+import * as Styled from './styles';
+import { Container } from 'components/Container/styles';
+import { Button } from 'components/Button';
+import { Heading } from 'components/Heading';
+import { FormControl } from 'components/User/Login/styles';
 
 const Manager = () => {
   const { allProducts } = useContext(ProductsContext);
@@ -24,15 +27,15 @@ const Manager = () => {
       setLoading(true);
       try {
         const { data: response } = await axios.post(
-          "http://localhost:3333/makerelation",
+          'http://localhost:3333/makerelation',
           article,
           {
             headers: { Authorization: `Bearer ${token}` },
-          }
+          },
         );
         console.log(response);
-        window.alert("relação criada com sucesso");
-        document.getElementById("form").reset();
+        window.alert('relação criada com sucesso');
+        document.getElementById('form').reset();
       } catch (error) {
         console.error(error.message);
       }
@@ -45,29 +48,37 @@ const Manager = () => {
   const [selectUser, setSelectUser] = useState();
 
   return (
-    <Container>
-      {loading && <ModalLoading />}
-      <form onSubmit={onSubmit} id="form">
-        <h1>escolha o produto</h1>
-        <select
-          value={selectProduct}
-          onChange={(e) => setSelectProduct(e.target.value)}
+    <Styled.Container>
+      <Styled.Wrapper>
+        {loading && <ModalLoading />}
+        <form
+          onSubmit={onSubmit}
+          id="form"
+          style={{ display: 'flex', flexDirection: 'column' }}
         >
-          {allProducts.map((el) => (
-            <option value={el.id}>{el.name}</option>
-          ))}
-        </select>
-        <p>unidades</p>
-        <input type="number" name="number" />
-        <h1>escolha o usuário</h1>
-        <select onChange={(e) => setSelectUser(e.target.value)}>
-          {allUsers.map((el) => (
-            <option value={el.id}>{el.name}</option>
-          ))}
-        </select>
-        <button>Atrelar ao Usuário</button>
-      </form>
-    </Container>
+          <Heading>Escolha o produto</Heading>
+          <select
+            value={selectProduct}
+            onChange={(e) => setSelectProduct(e.target.value)}
+          >
+            {allProducts.map((el) => (
+              <option value={el.id}>{el.name}</option>
+            ))}
+          </select>
+          <Heading>Unidades</Heading>
+          <FormControl>
+            <input type="number" name="number" />
+          </FormControl>
+          <Heading>Escolha o usuário</Heading>
+          <select onChange={(e) => setSelectUser(e.target.value)}>
+            {allUsers.map((el) => (
+              <option value={el.id}>{el.name}</option>
+            ))}
+          </select>
+          <Button>Criar Relação</Button>
+        </form>
+      </Styled.Wrapper>
+    </Styled.Container>
   );
 };
 
