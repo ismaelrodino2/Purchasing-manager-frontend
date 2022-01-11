@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
     font-family: ${theme.fonts.default};
     font-size: ${theme.fonts.sizes.small};
     padding: 1rem 0;
+    pointer-events:none;
   }
 `} 
 
