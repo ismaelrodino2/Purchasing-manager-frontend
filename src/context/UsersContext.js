@@ -18,7 +18,6 @@ export const UsersContextProvider = ({ children }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [loading, setLoading] = useState();
   const { token } = useContext(TokenContext);
-  console.log(token)
 
   const syncUsers = useCallback(async () => {
     setLoading(true);

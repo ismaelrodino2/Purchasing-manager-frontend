@@ -33,7 +33,6 @@ const Manager = () => {
             headers: { Authorization: `Bearer ${token}` },
           },
         );
-        console.log(response);
         window.alert('relação criada com sucesso');
         document.getElementById('form').reset();
       } catch (error) {

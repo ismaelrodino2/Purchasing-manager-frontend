@@ -69,7 +69,7 @@ export const Register = () => {
               />
             </FormControl>
             {error && <Styled.Error>{error}</Styled.Error>}
-            <Button type="submit" theme="contained-green" rounded>
+            <Button type="submit" rounded>
               Registrar
             </Button>
           </form>
