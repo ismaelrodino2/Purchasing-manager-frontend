@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import P from 'prop-types';
 import { Title } from './styles';
 

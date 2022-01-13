@@ -5,12 +5,13 @@ import { TokenContext } from 'context/TokenContext';
 import { UsersContext } from 'context/UsersContext';
 import React, { useContext, useState } from 'react';
 import * as Styled from './styles';
-import { Container } from 'components/Container/styles';
 import { Button } from 'components/Button';
 import { Heading } from 'components/Heading';
 import { FormControl } from 'components/User/Login/styles';
 
 const Manager = () => {
+  const [selectProduct, setSelectProduct] = useState();
+  const [selectUser, setSelectUser] = useState();
   const { allProducts } = useContext(ProductsContext);
   const { allUsers } = useContext(UsersContext);
   const [loading, setLoading] = useState(false);
@@ -23,16 +24,13 @@ const Manager = () => {
       product_id: selectProduct,
       user_id: selectUser,
     };
+    console.log(article);
     const fetchData = async () => {
       setLoading(true);
       try {
-        const { data: response } = await axios.post(
-          'http://localhost:3333/makerelation',
-          article,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          },
-        );
+        await axios.post('http://localhost:3333/makerelation', article, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         window.alert('relação criada com sucesso');
         document.getElementById('form').reset();
       } catch (error) {
@@ -43,8 +41,6 @@ const Manager = () => {
 
     fetchData();
   };
-  const [selectProduct, setSelectProduct] = useState();
-  const [selectUser, setSelectUser] = useState();
 
   return (
     <Styled.Container>
@@ -57,9 +53,11 @@ const Manager = () => {
         >
           <Heading>Escolha o produto</Heading>
           <select
-            value={selectProduct}
+            value={selectProduct || ''}
             onChange={(e) => setSelectProduct(e.target.value)}
           >
+            <option value={''}>{''}</option>
+
             {allProducts.map((el) => (
               <option value={el.id}>{el.name}</option>
             ))}
@@ -69,7 +67,12 @@ const Manager = () => {
             <input type="number" name="number" />
           </FormControl>
           <Heading>Escolha o usuário</Heading>
-          <select onChange={(e) => setSelectUser(e.target.value)}>
+          <select
+            value={selectUser || ''}
+            onChange={(e) => setSelectUser(e.target.value)}
+          >
+            <option value={''}>{''}</option>
+
             {allUsers.map((el) => (
               <option value={el.id}>{el.name}</option>
             ))}

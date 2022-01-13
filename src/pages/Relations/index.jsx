@@ -1,24 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
-import { TokenContext } from "context/TokenContext";
-import * as Styled from "./styles";
-import axios from "axios";
-import { ModalLoading } from "components/ModalLoading";
-import { Container } from "components/Container/styles";
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { TokenContext } from 'context/TokenContext';
+import * as Styled from './styles';
+import axios from 'axios';
+import { ModalLoading } from 'components/ModalLoading';
+import { Container } from 'components/Container/styles';
+import { Button } from 'components/Button';
 
 const Relations = () => {
   const [loading, setLoading] = useState();
   const { token } = useContext(TokenContext);
   const [relations, setRelations] = useState();
 
-  useEffect(() => {
+  const getData = useCallback(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const { data: response } = await axios.get(
-          "http://localhost:3333/makerelation",
+          'http://localhost:3333/makerelation',
           {
             headers: { Authorization: `Bearer ${token}` },
-          }
+          },
         );
         setRelations(response);
       } catch (error) {
@@ -29,6 +30,24 @@ const Relations = () => {
 
     fetchData();
   }, [token]);
+
+  useEffect(() => {
+    getData();
+  }, [getData]);
+
+  async function teste(product_id, user_id, qnt) {
+    setLoading(true);
+    await axios.delete('http://localhost:3333/makerelation', {
+      data: {
+        user_id: user_id,
+        product_id: product_id,
+        qnt: qnt,
+      },
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    getData();
+    setLoading(false);
+  }
 
   return (
     <Container>
@@ -42,14 +61,20 @@ const Relations = () => {
                 <p>Nome: {el.name}</p>
                 <p>E-mail: {el.email}</p>
                 <p>
-                  Produto:{" "}
                   {el.products.map((element) => {
                     return (
-                      <div>
+                      <>
                         <p>Nome do produto: {element.name}</p>
                         <p>Quantidade: {element.number}</p>
                         <p>Preço total: {element.number * element.price}</p>
-                      </div>
+                        <Button
+                          onClick={() =>
+                            teste(element.id, el.id, element.number)
+                          }
+                        >
+                          Excluir
+                        </Button>
+                      </>
                     );
                   })}
                 </p>

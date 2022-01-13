@@ -18,10 +18,6 @@ const Users = () => {
     async (event) => {
       event.preventDefault();
       setLoading(true);
-      const article = {
-        name: event.target.name.value,
-        email: event.target.email.value,
-      };
       await axios.delete('http://localhost:3333/users', {
         data: {
           name: event.target.name.value,

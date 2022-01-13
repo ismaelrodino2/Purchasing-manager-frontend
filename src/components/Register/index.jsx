@@ -5,7 +5,6 @@ import { FormControl } from 'components/FormControl';
 
 import { LoginBar } from 'components/LoginBar';
 import { ModalLoading } from 'components/ModalLoading';
-import UIButton from 'components/UI/Button/Button';
 import React, { useState } from 'react';
 import * as Styled from './styles';
 
@@ -17,7 +16,6 @@ export const Register = () => {
   const [loading, setLoading] = useState(false);
 
   const [values, setValues] = useState(initialState);
-  const [error, setError] = useState(null);
 
   function onChange(event) {
     const { value, name } = event.target;
@@ -68,7 +66,6 @@ export const Register = () => {
                 value={values.password}
               />
             </FormControl>
-            {error && <Styled.Error>{error}</Styled.Error>}
             <Button type="submit" rounded>
               Registrar
             </Button>

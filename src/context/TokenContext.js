@@ -1,5 +1,6 @@
 import React from "react";
 import { createContext, useState } from "react";
+import P from 'prop-types';
 
 export const TokenContext = createContext({
   token: null,
@@ -14,4 +15,7 @@ export const TokenContextProvider = ({ children }) => {
       {children}
     </TokenContext.Provider>
   );
+};
+TokenContextProvider.P = {
+    children: P.node,
 };

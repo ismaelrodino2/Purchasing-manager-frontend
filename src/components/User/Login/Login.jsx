@@ -15,7 +15,6 @@ function initialState() {
 const UserLogin = () => {
   const [loading, setLoading] = useState();
   const [values, setValues] = useState(initialState);
-  const [error, setError] = useState(null);
   const { setToken } = useContext(TokenContext);
   const history = useHistory();
 
@@ -43,7 +42,6 @@ const UserLogin = () => {
 
     event.preventDefault();
 
-    // setError(error);
     setValues(initialState);
   }
 
@@ -73,7 +71,6 @@ const UserLogin = () => {
                 value={values.password}
               />
             </FormControl>
-            {error && <Styled.Error>{error}</Styled.Error>}
             <Button type="submit" theme="contained-green" rounded>
               Entrar
             </Button>
