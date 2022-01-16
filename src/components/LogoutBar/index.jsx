@@ -6,9 +6,16 @@ import * as Styled from './styles';
 export const LogoutBar = () => {
   const { setToken } = useContext(TokenContext);
 
+  function logout() {
+    setToken(null);
+    localStorage.removeItem('token');
+  }
+
   return (
     <Styled.Container>
-      <Button onClick={() => setToken(null)}><h2>Sair</h2></Button>
+      <Button onClick={() => logout()}>
+        <h2>Sair</h2>
+      </Button>
     </Styled.Container>
   );
 };
