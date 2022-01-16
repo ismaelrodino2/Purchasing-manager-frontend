@@ -38,7 +38,7 @@ const Products = () => {
         {allProducts &&
           allProducts.map((el) => {
             return (
-              <Styled.Wrapper>
+              <Styled.Wrapper key={el.id}>
                 <form onSubmit={onSubmit}>
                   <p>
                     Nome:

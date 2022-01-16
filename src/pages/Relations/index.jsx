@@ -57,13 +57,13 @@ const Relations = () => {
         {relations &&
           relations.map((el) => {
             return (
-              <Styled.Wrapper>
+              <Styled.Wrapper key={el.id}>
                 <p>Nome: {el.name}</p>
                 <p>E-mail: {el.email}</p>
                 <p>
                   {el.products.map((element) => {
                     return (
-                      <>
+                      <div key={el.id}>
                         <p>Nome do produto: {element.name}</p>
                         <p>Quantidade: {element.number}</p>
                         <p>Preço total: {element.number * element.price}</p>
@@ -74,7 +74,7 @@ const Relations = () => {
                         >
                           Excluir
                         </Button>
-                      </>
+                      </div>
                     );
                   })}
                 </p>

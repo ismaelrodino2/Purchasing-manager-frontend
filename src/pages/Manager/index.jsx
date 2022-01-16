@@ -59,7 +59,7 @@ const Manager = () => {
             <option value={''}>{''}</option>
 
             {allProducts.map((el) => (
-              <option value={el.id}>{el.name}</option>
+              <option key={el.id} value={el.id}>{el.name}</option>
             ))}
           </select>
           <Heading>Unidades</Heading>
@@ -74,7 +74,7 @@ const Manager = () => {
             <option value={''}>{''}</option>
 
             {allUsers.map((el) => (
-              <option value={el.id}>{el.name}</option>
+              <option key={el.id} value={el.id}>{el.name}</option>
             ))}
           </select>
           <Button>Criar Relação</Button>
