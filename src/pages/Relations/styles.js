@@ -12,8 +12,8 @@ export const Wrapper = styled.div`
 export const Grid = styled.div`
   gap: 40px;
   display: grid;
-  padding-top: 20px;
+  padding: 20px 0;
 
-  grid-template-columns: repeat(auto-fit, 200px);
+  grid-template-columns: repeat(auto-fit, 230px);
   justify-content: center;
 `;
