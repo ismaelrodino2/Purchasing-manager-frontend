@@ -29,7 +29,7 @@ const UserLogin = () => {
 
   function onSubmit(event) {
     setLoading(true);
-    axios.post('http://localhost:3333/login', values).then((resp) => {
+    axios.post(`${process.env.REACT_APP_API_URL}/login`, values).then((resp) => {
       const { data } = resp;
       const { token } = data;
       if (token) {

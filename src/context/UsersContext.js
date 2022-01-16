@@ -23,7 +23,7 @@ export const UsersContextProvider = ({ children }) => {
     setLoading(true);
     try {
       const { data: response } = await axios.get(
-        "http://localhost:3333/users",
+        `${process.env.REACT_APP_API_URL}/users`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

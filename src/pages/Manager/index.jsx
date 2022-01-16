@@ -28,7 +28,7 @@ const Manager = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        await axios.post('http://localhost:3333/makerelation', article, {
+        await axios.post(`${process.env.REACT_APP_API_URL}/makerelation`, article, {
           headers: { Authorization: `Bearer ${token}` },
         });
         window.alert('relação criada com sucesso');

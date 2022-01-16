@@ -30,7 +30,7 @@ export const Register = () => {
     setLoading(true);
     event.preventDefault();
 
-    axios.post('http://localhost:3333/register', values).then((resp) => {
+    axios.post(`${process.env.REACT_APP_API_URL}/register`, values).then((resp) => {
       window.alert('Success');
     });
 

@@ -26,7 +26,7 @@ const CreateProduct = () => {
       const fetchData = async () => {
         setLoading(true);
         try {
-          await axios.post('http://localhost:3333/products', article, {
+          await axios.post(`${process.env.REACT_APP_API_URL}/products`, article, {
             headers: { Authorization: `Bearer ${token}` },
           });
           window.alert('Produto criado com sucesso');

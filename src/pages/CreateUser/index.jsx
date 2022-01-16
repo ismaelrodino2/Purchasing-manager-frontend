@@ -27,7 +27,7 @@ const CreateUser = () => {
       const fetchData = async () => {
         setLoading(true);
         try {
-          await axios.post('http://localhost:3333/users', article, {
+          await axios.post(`${process.env.REACT_APP_API_URL}/users`, article, {
             headers: { Authorization: `Bearer ${token}` },
           });
           window.alert('Usuário criado com sucesso');

@@ -16,7 +16,7 @@ const Relations = () => {
       setLoading(true);
       try {
         const { data: response } = await axios.get(
-          'http://localhost:3333/makerelation',
+            `${process.env.REACT_APP_API_URL}/makerelation`,
           {
             headers: { Authorization: `Bearer ${token}` },
           },
@@ -37,7 +37,7 @@ const Relations = () => {
 
   async function teste(product_id, user_id, qnt) {
     setLoading(true);
-    await axios.delete('http://localhost:3333/makerelation', {
+    await axios.delete(`${process.env.REACT_APP_API_URL}/makerelation`, {
       data: {
         user_id: user_id,
         product_id: product_id,

@@ -23,7 +23,7 @@ export const ProductsContextProvider = ({ children }) => {
     setLoading(true);
     try {
       const { data: response } = await axios.get(
-        "http://localhost:3333/products",
+        `${process.env.REACT_APP_API_URL}/products`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

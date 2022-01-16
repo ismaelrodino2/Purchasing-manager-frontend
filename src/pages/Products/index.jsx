@@ -17,7 +17,7 @@ const Products = () => {
     async (event) => {
       event.preventDefault();
       setLoading(true);
-      await axios.delete('http://localhost:3333/products', {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/products`, {
         data: {
           name: event.target.name.value,
           number: event.target.number.value,

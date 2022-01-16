@@ -18,7 +18,7 @@ const Users = () => {
     async (event) => {
       event.preventDefault();
       setLoading(true);
-      await axios.delete('http://localhost:3333/users', {
+      await axios.delete(`${process.env.REACT_APP_API_URL}/users`, {
         data: {
           name: event.target.name.value,
           email: event.target.email.value,
